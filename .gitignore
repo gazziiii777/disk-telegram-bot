@@ -11,4 +11,4 @@ core/keyboards/__pycache__
 core/admin_panel/__pycache__
 core/db/__pycache__
 core/db/questions/__pycache__
-core/db/databases/*
+core/db/databases/questions.db
