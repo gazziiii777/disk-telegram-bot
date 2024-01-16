@@ -12,3 +12,4 @@ core/admin_panel/__pycache__
 core/db/__pycache__
 core/db/questions/__pycache__
 core/db/databases/questions.db
+core/FSM/__pycache__/
