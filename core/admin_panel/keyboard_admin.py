@@ -18,7 +18,7 @@ buttons_1 = [
 
 buttons_2 = [
     [
-        InlineKeyboardButton(text="Ответить пользователю", callback_data="send_answer")
+        InlineKeyboardButton(text="Ответить пользователю", callback_data="answer_now")
     ],
     [
         InlineKeyboardButton(text="Потом", callback_data="not_now")
@@ -28,6 +28,15 @@ buttons_2 = [
     ],
 ]
 
+buttons_3 = [
+    [
+        InlineKeyboardButton(text="Отправить", callback_data="send_answer")
+    ],
+    [
+        InlineKeyboardButton(text="Переписать", callback_data="answer_now")
+    ],
+]
 # Создаем объект инлайн-клавиатуры
 admin_keyboard = InlineKeyboardMarkup(inline_keyboard=buttons_1)
 admin_answer = InlineKeyboardMarkup(inline_keyboard=buttons_2)
+admin_send_answer = InlineKeyboardMarkup(inline_keyboard=buttons_3)

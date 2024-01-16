@@ -1,6 +1,5 @@
 from aiogram import F
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery
 
 from core.dispatcher import dp, bot
@@ -9,6 +8,7 @@ from core.keyboards import main_menu_keyboard, disk_keyboard, my_photo_and_video
 from core.db.questions.functions_db import questions_add_db
 from core.admin_panel.keyboard_admin import admin_answer
 from core.admin_panel.callback_admin import question_info_for_answer
+from core.FSM.FSM import FSMContact
 
 
 @dp.callback_query(F.data == "main_menu")
@@ -41,11 +41,6 @@ async def disk(callback: CallbackQuery):
         text="ривет если ты хочешь написать письмо адмиину указать свою проблему",
         reply_markup=my_photo_and_video_keyboard.carousel
     )
-
-
-# Cоздаем класс StatesGroup для нашей машины состояний
-class FSMContact(StatesGroup):
-    message_for_admin = State()
 
 
 @dp.callback_query(F.data == "contact_the_admin")
@@ -88,4 +83,3 @@ async def disk(callback: CallbackQuery, state: FSMContext):
             reply_markup=admin_answer
         )
     await state.clear()
-    print("gi")
