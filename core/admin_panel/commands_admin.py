@@ -8,6 +8,7 @@ from core.settings import settings
 from core.admin_panel.keyboard_admin import admin_keyboard, admin_send_answer  # Клавиатура для администратора
 from core.FSM.FSM import FSMAnswer
 
+
 @dp.message(Command('admin'))
 async def cmd_admin(message: Message):
     if message.from_user.id == settings.bots.admin_id:
@@ -20,12 +21,10 @@ async def cmd_admin(message: Message):
 # Этот хэндлер будет срабатывать, если введено корректное имя
 # и переводить в состояние ожидания ввода возраста
 @dp.message(StateFilter(FSMAnswer.message_from_admin))
-async def process_name_sent(message: Message, state: FSMContext):
+async def process_fast_answer_on_question(message: Message, state: FSMContext):
     # Cохраняем введенное имя в хранилище по ключу "name"
     await state.update_data(text=message.text)
     await message.answer(
-        text=f'<b>Проверь свое письмо перед отправкой администратору:</b>\n{message.text}',
+        text=f'<b>Проверьте ответ на вопрос</b>\n{message.text}',
         reply_markup=admin_send_answer
     )
-
-

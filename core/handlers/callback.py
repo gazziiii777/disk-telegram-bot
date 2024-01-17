@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery
 
 from core.dispatcher import dp, bot
 from core.settings import settings
-from core.keyboards import main_menu_keyboard, disk_keyboard, my_photo_and_video_keyboard
+from core.keyboards import main_menu_keyboard, disk_keyboard, my_photo_and_video_keyboard, support_keyboard
 from core.db.questions.functions_db import questions_add_db
 from core.admin_panel.keyboard_admin import admin_answer
 from core.admin_panel.callback_admin import question_info_for_answer
@@ -43,11 +43,11 @@ async def disk(callback: CallbackQuery):
     )
 
 
-@dp.callback_query(F.data == "contact_the_admin")
-async def contact_the_admin(callback: CallbackQuery, state: FSMContext):
+@dp.callback_query(F.data == "contact_with_support")
+async def contact_with_support(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_text(
         text="Деловео предложение туда-сюда, хотите отправить файлик, то пишите на почту, если проблемма с ботом то пишите ниже",
-        reply_markup=main_menu_keyboard.contact
+        reply_markup=support_keyboard.support
     )
     # Устанавливаем состояние ожидания ввода имени
     await state.set_state(FSMContact.message_for_admin)
@@ -56,7 +56,7 @@ async def contact_the_admin(callback: CallbackQuery, state: FSMContext):
 @dp.callback_query(F.data == "support")
 async def contact_the_admin(callback: CallbackQuery, state: FSMContext):
     await callback.message.edit_text(
-        text="Привет, тут ты можешь связаться с админом, для отмены напиши /cancel",
+        text="/cancel",
     )
     # Устанавливаем состояние ожидания ввода имени
     await state.set_state(FSMContact.message_for_admin)
@@ -67,7 +67,7 @@ async def disk(callback: CallbackQuery, state: FSMContext):
     # После нажатия на кнопку текст меняется
     await questions_add_db(await state.get_data())
     await callback.answer(
-        text="Ваша сообщение отпраленно",
+        text="Ваше письмо успешно отправлено, в ближайшее время мы вам на него ответим",
         show_alert=True,
     )
     await callback.message.edit_text(

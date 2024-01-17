@@ -23,7 +23,7 @@ async def cmd_start(message: Message):
 # Этот хэндлер будет срабатывать на команду "/cancel" в любых состояниях,
 # кроме состояния по умолчанию, и отключать машину состояний
 @dp.message(Command('cancel'), ~StateFilter(default_state))
-async def process_cancel_command_state(message: Message, state: FSMContext):
+async def cmd_cancel(message: Message, state: FSMContext):
     await message.answer(
         "Приветсвенное сообщение",
         reply_markup=main_menu_keyboard.keyboard,
@@ -35,13 +35,13 @@ async def process_cancel_command_state(message: Message, state: FSMContext):
 # Этот хэндлер будет срабатывать, если введено корректное имя
 # и переводить в состояние ожидания ввода возраста
 @dp.message(StateFilter(FSMContact.message_for_admin))
-async def process_name_sent(message: Message, state: FSMContext):
+async def process_question_to_support(message: Message, state: FSMContext):
     # Cохраняем введенное имя в хранилище по ключу "name"
     await state.update_data(id=message.from_user.id, text=message.text, username=message.from_user.username,
                             answer=False)
     await message.answer(
-        text=f'<b>Проверь свое письмо перед отправкой администратору:</b>\n{message.text}',
-        reply_markup=support_keyboard.keyboard
+        text=f'<b>Пожалуйста, проверьте свое письмо перед отправкой в техподдержку:</b>\n{message.text}',
+        reply_markup=support_keyboard.question_to_support
     )
 
 

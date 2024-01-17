@@ -12,19 +12,9 @@ buttons_1 = [
         InlineKeyboardButton(text='Работа', callback_data='work')
     ],
     [
-        InlineKeyboardButton(text='Связь с админом', callback_data='contact_the_admin')
-    ],
-]
-
-buttons_2 = [
-    [
-        InlineKeyboardButton(text='Tехподдержка', callback_data='support')
-    ],
-    [
-        InlineKeyboardButton(text='Назад', callback_data='main_menu')
+        InlineKeyboardButton(text='Связь с админом', callback_data='contact_with_support')
     ],
 ]
 
 # Создаем объект инлайн-клавиатуры
 keyboard = InlineKeyboardMarkup(inline_keyboard=buttons_1)
-contact = InlineKeyboardMarkup(inline_keyboard=buttons_2)
